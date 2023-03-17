@@ -34,21 +34,21 @@ class ProgramController extends Controller
         }
 
         return $response;
-       
-
+    
     }
 
     /**
      * Display the specified resource.
-     */
+    */
     public function show($id)
     {
         return Program::find($id);
     }
 
     /**
-     * Update the specified resource in storage.
-     */
+    * Update the specified resource in storage.
+    */ 
+
     public function update(Request $request, $id)
     {
         $response = Program::find($id);

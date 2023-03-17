@@ -18,22 +18,29 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+
+        // $request->validate([
+        //     'title' => $request['title'],
+        //     'description' => $request['desc'],
+        //     'image' => $request['image'],
+        //     'public_id' => $request['public_id']
+        // ]);
         
-        $response = News::create($request->all());
+        $response = News::create($request->post());
 
         if ($response) {
-            $response = [
+            $res = [
                 'status' => 200,
                 'message' => 'Succesfully deleted'
             ];
         }  else {
-            $response = [
+            $res = [
                 'status' => 404,
                 'message' => 'Unable to delete record'
             ];
         }
 
-        return $response;
+        return $res;
        
 
     }

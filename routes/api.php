@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ObjectiveController;
+use App\Http\Controllers\VisionController;
+use App\Http\Controllers\MissionController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +28,7 @@ Route::delete('/objectives/{id}', [ObjectiveController::class, 'destroy']);
 
 // MISSION
 Route::get('/mission', [MissionController::class, 'index']);   
-// Route::post('/mission', [MissionController::class, 'store']);
+Route::post('/mission', [MissionController::class, 'store']);
 Route::post('/mission/{id}', [MissionController::class, 'update']);  
 Route::delete('/mission/{id}', [MissionController::class, 'destroy']);    
 
@@ -40,6 +43,7 @@ Route::delete('/vision/{id}', [VisionController::class, 'destroy']);
 // FACULTY
 Route::get('/faculty', [FacultyController::class, 'index']);   
 Route::post('/faculty', [FacultyController::class, 'store']);    
+Route::get('/faculty/{id}', [FacultyController::class, 'show']);  
 Route::post('/faculty/{id}', [FacultyController::class, 'update']);  
 Route::delete('/faculty/{id}', [FacultyController::class, 'destroy']);         
 

@@ -18,9 +18,22 @@ class FacultyController extends Controller
 
     public function store(Request $request)
     {
-        
-        return Faculty::create($request->all());
-       
+         
+        $response = Faculty::create($request->post());
+
+        if ($response) {
+            $res = [
+                'status' => 200,
+                'message' => 'Succesfully deleted'
+            ];
+        }  else {
+            $res = [
+                'status' => 404,
+                'message' => 'Unable to delete record'
+            ];
+        }
+
+        return $res;
 
     }
 
