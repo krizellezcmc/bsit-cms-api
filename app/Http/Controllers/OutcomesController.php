@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Objectives;
+use App\Models\Outcomes;
+
 use Illuminate\Http\Request;
 
-class ObjectiveController extends Controller
+class OutcomesController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Objectives::all();
+        return Outcomes::all();
     }
 
     /**
@@ -22,7 +23,7 @@ class ObjectiveController extends Controller
     public function store(Request $request)
     {
         
-        return Objectives::create($request->post());
+        return Outcomes::create($request->post());
        
 
     }
@@ -40,7 +41,7 @@ class ObjectiveController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Objectives::find($id);
+        $response = Outcomes::find($id);
         $response->update($request->all());
         return $response;
     }
@@ -50,7 +51,7 @@ class ObjectiveController extends Controller
      */
     public function destroy($id)
     {
-        $response = Objectives::destroy($id);
+        $response = Outcomes::destroy($id);
 
         if ($response) {
             $response = [

@@ -11,21 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('outcomes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->default('Program Outcomes');
             $table->text('description');
-            $table->string('image')->nullable();
-            $table->string('public_id')->nullable();
             $table->timestamps();
-        });
-    }
+        }); 
+    }   
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('outcomes');
     }
 };

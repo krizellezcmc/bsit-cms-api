@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
             $table->string('title')->default('Mission');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

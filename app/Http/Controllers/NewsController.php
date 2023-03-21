@@ -31,12 +31,12 @@ class NewsController extends Controller
         if ($response) {
             $res = [
                 'status' => 200,
-                'message' => 'Succesfully deleted'
+                'message' => 'Succesfully added'
             ];
         }  else {
             $res = [
                 'status' => 404,
-                'message' => 'Unable to delete record'
+                'message' => 'Unable to add record'
             ];
         }
 
