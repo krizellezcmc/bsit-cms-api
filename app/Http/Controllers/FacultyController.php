@@ -12,7 +12,7 @@ class FacultyController extends Controller
         return Faculty::all();
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      */
 
@@ -21,19 +21,9 @@ class FacultyController extends Controller
          
         $response = Faculty::create($request->post());
 
-        if ($response) {
-            $res = [
-                'status' => 200,
-                'message' => 'Succesfully deleted'
-            ];
-        }  else {
-            $res = [
-                'status' => 404,
-                'message' => 'Unable to delete record'
-            ];
-        }
+        
 
-        return $res;
+        return $response;
 
     }
 
@@ -62,17 +52,17 @@ class FacultyController extends Controller
     {
         $response = Faculty::destroy($id);
 
-        if ($response) {
-            $response = [
-                'status' => 200,
-                'message' => 'Succesfully deleted'
-            ];
-        }  else {
-            $response = [
-                'status' => 404,
-                'message' => 'Unable to delete record'
-            ];
-        }
+        // if ($response) {
+        //     $response = [
+        //         'status' => 200,
+        //         'message' => 'Succesfully deleted'
+        //     ];
+        // }  else {
+        //     $response = [
+        //         'status' => 404,
+        //         'message' => 'Unable to delete record'
+        //     ];
+        // }
 
         return $response;
     }

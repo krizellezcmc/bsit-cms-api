@@ -9,6 +9,9 @@ use App\Http\Controllers\MissionController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OutcomesController;
+
+
 
 
 
@@ -27,21 +30,28 @@ use App\Http\Controllers\UserController;
 Route::get('/objectives', [ObjectiveController::class, 'index']);   
 Route::post('/objectives', [ObjectiveController::class, 'store']);    
 Route::post('/objectives/{id}', [ObjectiveController::class, 'update']);  
-Route::delete('/objectives/{id}', [ObjectiveController::class, 'destroy']);        
+// Route::delete('/objectives/{id}', [ObjectiveController::class, 'destroy']);        
 
 
 // MISSION
 Route::get('/mission', [MissionController::class, 'index']);   
 Route::post('/mission', [MissionController::class, 'store']);
 Route::post('/mission/{id}', [MissionController::class, 'update']);  
-Route::delete('/mission/{id}', [MissionController::class, 'destroy']);    
+// Route::delete('/mission/{id}', [MissionController::class, 'destroy']);    
 
 
 // VISION
 Route::get('/vision', [VisionController::class, 'index']);     
 // Route::post('/vision', [VisionController::class, 'store']);
 Route::post('/vision/{id}', [VisionController::class, 'update']);  
-Route::delete('/vision/{id}', [VisionController::class, 'destroy']);    
+// Route::delete('/vision/{id}', [VisionController::class, 'destroy']);   
+
+
+// VISION
+Route::get('/outcomes', [OutcomesController::class, 'index']);     
+// Route::post('/outcomes', [VisionController::class, 'store']);
+Route::post('/outcomes/{id}', [OutcomesController::class, 'update']);  
+// Route::delete('/outcomes/{id}', [OutcomesController::class, 'destroy']);   
 
 
 // FACULTY
@@ -58,7 +68,6 @@ Route::get('/programs/{id}', [ProgramController::class, 'show']);
 Route::post('/programs', [ProgramController::class, 'store']);    
 Route::post('/programs/{id}', [ProgramController::class, 'update']);  
 Route::delete('/programs/{id}', [ProgramController::class, 'destroy']); 
-
 
 
 // NEWS
