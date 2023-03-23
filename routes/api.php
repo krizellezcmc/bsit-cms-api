@@ -8,6 +8,7 @@ use App\Http\Controllers\VisionController;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\UserController;
 
 
 
@@ -65,6 +66,15 @@ Route::get('/news', [NewsController::class, 'index']);
 Route::post('/news', [NewsController::class, 'store']);    
 Route::post('/news/{id}', [NewsController::class, 'update']);  
 Route::delete('/news/{id}', [NewsController::class, 'destroy']); 
+
+
+
+// NEWS
+Route::get('/user', [UserController::class, 'index']);   
+Route::post('/register', [UserController::class, 'register']);   
+Route::post('/login', [UserController::class, 'login']);    
+// Route::post('/user/{id}', [UserController::class, 'update']);  
+// Route::delete('/user/{id}', [UserController::class, 'destroy']); 
 
 
 
