@@ -10,8 +10,8 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OutcomesController;
-
-
+use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\FileController;
 
 
 
@@ -86,7 +86,21 @@ Route::post('/login', [UserController::class, 'login']);
 // Route::delete('/user/{id}', [UserController::class, 'destroy']); 
 
 
+// ALUMNI
+Route::get('/alumni', [AlumniController::class, 'index']);   
+Route::post('/alumni', [AlumniController::class, 'store']);    
+Route::get('/alumni/{id}', [AlumniController::class, 'show']);  
+Route::post('/alumni/{id}', [AlumniController::class, 'update']);  
+Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);    
 
+
+// FILES
+Route::get('/files', [FileController::class, 'index']);   
+Route::post('/upload', [FileController::class, 'upload']);   
+Route::get('/file/{file_name}', [FileController::class, 'show']); 
+Route::get('/download/{file_name}', [FileController::class, 'download']); 
+Route::post('/files/{id}', [FileController::class, 'update']);  
+Route::delete('/files/{id}', [FileController::class, 'destroy']);
 // Route::post('/objectives', );
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

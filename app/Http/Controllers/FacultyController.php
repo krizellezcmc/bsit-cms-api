@@ -20,9 +20,6 @@ class FacultyController extends Controller
     {
          
         $response = Faculty::create($request->post());
-
-        
-
         return $response;
 
     }
@@ -44,7 +41,6 @@ class FacultyController extends Controller
         $response->update($request->all());
         return $response;
     }
-
     /**
      * Remove the specified resource from storage.
      */
