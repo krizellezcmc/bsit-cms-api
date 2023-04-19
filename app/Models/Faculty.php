@@ -10,7 +10,9 @@ class Faculty extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'fname',
+        'mi',
+        'lname',
         'image',
         'designation',
         'qualifications'

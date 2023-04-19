@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faculty;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class FacultyController extends Controller
 {
@@ -18,10 +21,31 @@ class FacultyController extends Controller
 
     public function store(Request $request)
     {
-         
-        $response = Faculty::create($request->post());
-        return $response;
+        $Faculty = Faculty::create($request->post());
+        
+        if ($Faculty) {
+            $response = User::create([
+                'fname' => $Faculty->fname,
+                'mi' => $Faculty->mi,
+                'lname' => $Faculty->lname,
+                'year' => '-',
+                'email' =>  Str::lower($Faculty->lname.'_'.$Faculty->fname.'@wmsu.ccs'),
+                'password' => Hash::make('@ccs2016'),
+                'role' => 1
+            ]);
 
+            if ($response) {
+                $response = [
+                    'status' => 200,
+                    'message' => 'Succesfully recorded'
+                ];
+            }  else {
+                $response = [
+                    'status' => 404,
+                    'message' => 'Unable to record'
+                ];
+            }
+        }
     }
 
     /**

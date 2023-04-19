@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->text('fname');
+            $table->text('mi');
+            $table->text('lname');
             $table->string('image')->nullable();
             $table->string('designation');
             $table->string('qualifications');

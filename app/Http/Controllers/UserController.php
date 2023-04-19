@@ -25,7 +25,7 @@ class UserController extends Controller
             'mi' => $request->mi,
             'lname' => $request->lname,
             'role' => $request->role,
-            'year' => $request->year,   
+            'year' => $request->year,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -59,9 +59,9 @@ class UserController extends Controller
             'password' => $request->password
            );
 
-           if(User::attempt($user))
+           if($response = User::attempt($user))
            {
-            return 'success';
+                return $response;
            }
            
            else

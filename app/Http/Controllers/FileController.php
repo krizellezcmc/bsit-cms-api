@@ -18,25 +18,53 @@ class FileController extends Controller
 
     public function upload(Request $request)
     {
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $name = $file->getClientOriginalName();
+            $fileName = time() . '_' . $name;
+            $file->move(public_path('uploads'), $fileName);
+            $path = '/uploads/' . $fileName;
 
-        $upload_file = new File;
-         
+            // SAVE TO DB
 
-        $file = $request->file('file');
-        $originalName = $file->getClientOriginalName();
-        $fileType = $file->getClientOriginalExtension();
-        $path = $file->store('uploads', 'public');
-        // return response()->json(['path' => $path, 'original_name' => $originalName, 'file_type' => $fileType]);
+            $upload_file = new File;
+            $upload_file->name = $name;
+            $upload_file->file_name = $path;   
+            $upload_file->file_type = $file->getClientOriginalExtension();
+            $upload_file->other_details = $request->others ?? '';
+            $insert = $upload_file->save();
+    
+            if ($insert) {
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'File uploaded successfully',
+                    'path' => '/uploads/' . $fileName,
+                ]);
+            }
+            
+        }
+    
+        return response()->json([
+            'message' => 'File upload failed'
+        ], 400);
+
+
+        // $upload_file = new File;
+        // $file = $request->file('file');
+        // $originalName = $file->getClientOriginalName();
+        // $fileType = $file->getClientOriginalExtension();
+        // $path = $file->store('uploads', 'public');
+        // // return response()->json(['path' => $path, 'original_name' => $originalName, 'file_type' => $fileType]);
     
         
-        // SAVE TO DB
-        $upload_file->name = $originalName;
-        $upload_file->file_name = $path;    
-        $upload_file->file_type = $fileType;
-        $upload_file->other_details = $request->others;
-        $upload_file->save();
+        // // SAVE TO DB
+        // $upload_file->name = $originalName;
+        // $upload_file->file_name = $path;    
+        // $upload_file->file_type = $fileType;
+        // $upload_file->other_details = $request->others;
+        // $upload_file->save();
     
-        return response()->json(['message' => 'File uploaded', 'data' => $upload_file]);
+        // return response()->json(['message' => 'File uploaded', 'data' => $upload_file]);
         // $response = File::create($request->post());
         // return $response;
 
@@ -65,12 +93,12 @@ class FileController extends Controller
 
     public function download($file_name)
     {
-        // $path = $file_name;
-        // $filename = basename($file_name);
-        // return response()->download(storage_path('app/public/uploads/' . $path), $filename);
-        $path = storage_path('app/public/uploads/' . $file_name);
+        $path = $file_name;
+        $filename = basename($file_name);
+        return response()->download(storage_path('app/public/uploads/' . $path), $filename);
+        // $path = storage_path('app/public/uploads/' . $file_name);
 
-        return response()->json(['path' => $path]);
+        // return response()->json(['path' => $path]);
     }
 
    
