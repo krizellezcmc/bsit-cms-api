@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -54,20 +55,31 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $user = array(
-            'email'  => $request->email,
-            'password' => $request->password
-           );
+        $credentials = $request->only('email', 'password');
 
-           if($response = User::attempt($user))
-           {
-                return $response;
-           }
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            // $token = $user->createToken('MyApp')->accessToken;
+            return response()->json(['status' => 1, 'user' => $user], 200);
+        } else {
+            return response()->json(['status' => 0, 'error' => 'Unauthorized'], 401);
+        }
+        
+    // {
+    //     $user = array(
+    //         'email'  => $request->email,
+    //         'password' => $request->password
+    //        );
+
+    //        if(User::attempt($user))
+    //        {
+    //             return 'success';
+    //        }
            
-           else
-           {
-            return 'error';
-           }
+    //        else
+    //        {
+    //         return 'error';
+    //        }
         // if ($insert) {
         //     $res = response()->json(
         //         [
@@ -87,6 +99,35 @@ class UserController extends Controller
         // return $res;
    
        
+    }
+
+    public function addAdmin() {
+        $insert =  User::create([
+            'fname' => 'Admin',
+            'mi' => '-',
+            'lname' => '-',
+            'role' => 0,
+            'year' => '-',
+            'email' => 'admin_ccs@gmail.com',
+            'password' => Hash::make('admin_ccs'),
+        ]);
+
+      
+        if ($insert) {
+            return response()->json(
+                [
+                    'message' => 'Admin Created',
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'message' => 'failed',
+                ],
+                409
+            );
+        }
     }
 
     /**

@@ -78,8 +78,9 @@ Route::delete('/news/{id}', [NewsController::class, 'destroy']);
 
 
 
-// NEWS
+// AUTH
 Route::get('/user', [UserController::class, 'index']);   
+Route::post('/addAdmin', [UserController::class, 'addAdmin']);   
 Route::post('/register', [UserController::class, 'register']);   
 Route::post('/login', [UserController::class, 'login']);    
 // Route::post('/user/{id}', [UserController::class, 'update']);  
