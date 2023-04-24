@@ -11,6 +11,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OutcomesController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\FileController;
 
 
@@ -93,6 +94,14 @@ Route::post('/alumni', [AlumniController::class, 'store']);
 Route::get('/alumni/{id}', [AlumniController::class, 'show']);  
 Route::post('/alumni/{id}', [AlumniController::class, 'update']);  
 Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);    
+
+
+// STUDENT ACTIVITIES
+Route::get('/activity', [ActivityController::class, 'index']);   
+Route::post('/activity', [ActivityController::class, 'store']);    
+Route::get('/activity/{id}', [ActivityController::class, 'show']);  
+Route::post('/activity/{id}', [ActivityController::class, 'update']);  
+Route::delete('/activity/{id}', [ActivityController::class, 'destroy']);    
 
 
 // FILES

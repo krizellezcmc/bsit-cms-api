@@ -26,7 +26,6 @@ class FileController extends Controller
             $path = '/uploads/' . $fileName;
 
             // SAVE TO DB
-
             $upload_file = new File;
             $upload_file->name = $name;
             $upload_file->file_name = $path;   
