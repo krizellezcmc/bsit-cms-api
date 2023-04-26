@@ -12,9 +12,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OutcomesController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\FileController;
-
-
+use App\Http\Controllers\MemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +102,20 @@ Route::post('/activity', [ActivityController::class, 'store']);
 Route::get('/activity/{id}', [ActivityController::class, 'show']);  
 Route::post('/activity/{id}', [ActivityController::class, 'update']);  
 Route::delete('/activity/{id}', [ActivityController::class, 'destroy']);    
+
+// STUDENT SUPPORT
+Route::get('/support', [SupportController::class, 'index']);   
+Route::post('/support', [SupportController::class, 'store']);    
+Route::get('/support/{id}', [SupportController::class, 'show']);  
+Route::post('/support/{id}', [SupportController::class, 'update']);  
+Route::delete('/support/{id}', [SupportController::class, 'destroy']);   
+
+// MEMO
+Route::get('/memo', [MemoController::class, 'index']);   
+Route::post('/memo', [MemoController::class, 'store']);    
+Route::get('/memo/{id}', [MemoController::class, 'show']);  
+Route::post('/memo/{id}', [MemoController::class, 'update']);  
+Route::delete('/memo/{id}', [MemoController::class, 'destroy']);   
 
 
 // FILES

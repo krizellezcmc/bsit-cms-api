@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class FileController extends Controller
 {
@@ -18,26 +20,33 @@ class FileController extends Controller
 
     public function upload(Request $request)
     {
+        $public_path = Storage::path('public/uploads');
+        
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $name = $file->getClientOriginalName();
-            $fileName = time() . '_' . $name;
-            $file->move(public_path('uploads'), $fileName);
-            $path = '/uploads/' . $fileName;
+            $path = $file->store('public');
+            $fileName = explode('/', $path, 2);
+            // $fileName = time() . '_' . $name;
+            $file->move(public_path('storage'), $fileName[1]);
+            // $path = '/uploads/' . $fileName; 
+
+
+            $new_path = 'localhost:8000/storage/'.$fileName[1];
 
             // SAVE TO DB
             $upload_file = new File;
             $upload_file->name = $name;
-            $upload_file->file_name = $path;   
+            $upload_file->file_name = $new_path;   
             $upload_file->file_type = $file->getClientOriginalExtension();
             $upload_file->other_details = $request->others ?? '';
             $insert = $upload_file->save();
     
-            if ($insert) {
+            if ($path && $insert) {
                 return response()->json([
                     'status' => 1,
                     'message' => 'File uploaded successfully',
-                    'path' => '/uploads/' . $fileName,
+                    'path' => $new_path
                 ]);
             }
             

@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Support;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-use App\Models\Activity;
-use App\Models\Image;
-
-class ActivityController extends Controller
+class SupportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Activity::all();
+        return Support::all();
     }
 
     /**
@@ -23,40 +20,10 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+        $response = Support::create($request->post());
+        return $response;
 
-        $activity = new Activity;
-        $activity-> activity_name = $request['activity_name']; 
-        $activity-> date_started = $request['date_started'];
-        $activity-> date_ended = $request['date_ended']; 
-        $activity-> location = $request['location']; 
-        $activity-> link = $request['link']; 
-        $activity-> description = $request['description'];
-        $activity = save();
-        
-        foreach ($request->file('images') as $key => $file) {
-            $path = $file->store('public');
-            $name = explode("/",$path, 2);
-            
-            $files = new Image;
-            $files -> name = "localhost:8000/storage/".$name[1];
-            $files -> FK_activity_ID = $activity->id;
-            $files -> created_at = now();
-            $files -> updated_at = now();
-            $files -> save();
-        }
-
-        
-        
-        
-        // $Activity = Activity::create($request->post());
-
-
-        // $image = new Image;
-        // $image = 
-        // $response -> path = $Activity->id;
-        // return $response;
-
-        if ($activity && $files) {
+        if ($response) {
             $response = [
                 'status' => 200,
                 'message' => 'Successfully recorded'
@@ -74,7 +41,7 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        return Activity::find($id);
+        return Support::find($id);
     }
 
     /**
@@ -82,7 +49,7 @@ class ActivityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $response = Activity::find($id);
+        $response = Support::find($id);
         $response->update($request->all());
         return $response;
 
@@ -105,7 +72,7 @@ class ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        $response = Activity::destroy($id);
+        $response = Support::destroy($id);
 
         if ($response) {
             $response = [
