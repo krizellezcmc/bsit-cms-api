@@ -114,6 +114,7 @@ Route::delete('/support/{id}', [SupportController::class, 'destroy']);
 Route::get('/memo', [MemoController::class, 'index']);   
 Route::post('/memo', [MemoController::class, 'store']);    
 Route::get('/memo/{id}', [MemoController::class, 'show']);  
+Route::get('/memoAccess/{access}', [MemoController::class, 'showAccess']);  
 Route::post('/memo/{id}', [MemoController::class, 'update']);  
 Route::delete('/memo/{id}', [MemoController::class, 'destroy']);   
 

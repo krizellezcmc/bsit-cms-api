@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('description');
             $table->text('files');
+            $table->integer('access');
             $table->timestamps();
         });
     }

@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Memo extends Model
 {
     use HasFactory;
 
-    protected $fillables = [
+    protected $fillable = [
         'title',
         'description',
-        'files'
+        'files', 
+        'access'
     ];
 }
