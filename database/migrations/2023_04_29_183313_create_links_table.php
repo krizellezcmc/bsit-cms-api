@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activities', function (Blueprint $table) {
+        Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $table->text('activity_name');
-            $table->date('date_started');
-            $table->date('date_ended');
-            $table->text('location');
+            $table->text('link_name');
+            $table->text('link_description');
             $table->text('link');
-            $table->text('description');
-            $table->text('image1');
-            $table->text('image2');
-            $table->text('image3');
+            $table->integer('access');
             $table->timestamps();
         });
     }
@@ -31,7 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activities');
+        Schema::dropIfExists('links');
     }
 };
-    

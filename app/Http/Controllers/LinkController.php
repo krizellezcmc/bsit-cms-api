@@ -2,38 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Link;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-use App\Models\Activity;
-use App\Models\Image;
-
-class ActivityController extends Controller
+class LinkController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Activity::all();
+        return Link::all();
     }
 
     /**
      * Store a newly created resource in storage.
-     */
+     */ 
     public function store(Request $request)
     {
-        $activity = new Activity;
-        $activity-> activity_name = $request->activity_name; 
-        $activity-> date_started = $request->date_started;
-        $activity-> date_ended = $request->date_ended; 
-        $activity-> location = $request->location; 
-        $activity-> link = $request->link; 
-        $activity-> description = $request->description;
-        $activity-> image1 = $request->images;
-        $insert = $activity->save();
-    
-        if ( $insert) {
+        $response = Link::create($request->post());
+
+        if ($response) {
             $response = [
                 'status' => 200,
                 'message' => 'Successfully recorded'
@@ -44,7 +34,6 @@ class ActivityController extends Controller
                 'message' => 'Unable to record data'
             ];
         }
-
     }
 
     /**
@@ -52,20 +41,28 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        return Activity::find($id);
+        return Link::find($id);
+    }
+
+
+    public function linkAccess(string $access)
+    {
+        return DB::table('links')
+        ->where('access', $access)
+        ->orWhere('access', 3)
+        ->get();
     }
 
     /**
      * Update the specified resource in storage.
-     */
+     */ 
     public function update(Request $request, string $id)
     {
-        $response = Activity::find($id);
-        $response->update($request->all());
-        return $response;
-
+        $res = Link::find($id);
+        $res->update($request->all());
         
-        if ($response) {
+        
+        if ($res) {
             $response = [
                 'status' => 200,
                 'message' => 'Record updated'
@@ -76,6 +73,8 @@ class ActivityController extends Controller
                 'message' => 'Unable to update record'
             ];
         }
+
+        return $response;
     }
 
     /**
@@ -83,7 +82,7 @@ class ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        $response = Activity::destroy($id);
+        $response = Link::destroy($id);
 
         if ($response) {
             $response = [
@@ -96,7 +95,7 @@ class ActivityController extends Controller
                 'message' => 'Unable to delete record'
             ];
         }
-         
+
         return $response;
     }
 }

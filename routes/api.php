@@ -15,6 +15,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\MemoController;
+use App\Http\Controllers\LinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +119,14 @@ Route::get('/memoAccess/{access}', [MemoController::class, 'showAccess']);
 Route::post('/memo/{id}', [MemoController::class, 'update']);  
 Route::delete('/memo/{id}', [MemoController::class, 'destroy']);   
 
+
+// LINK
+Route::get('/link', [LinkController::class, 'index']);   
+Route::post('/link', [LinkController::class, 'store']);    
+Route::get('/link/{id}', [LinkController::class, 'show']);  
+Route::get('/linkAccess/{access}', [LinkController::class, 'linkAccess']);
+Route::post('/link/{id}', [LinkController::class, 'update']);  
+Route::delete('/link/{id}', [LinkController::class, 'destroy']);
 
 // FILES
 Route::get('/files', [FileController::class, 'index']);   

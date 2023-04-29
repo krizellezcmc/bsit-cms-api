@@ -18,10 +18,7 @@ class AlumniController extends Controller
 
     public function store(Request $request)
     {
-         
         $response = Alumni::create($request->post());
-        return $response;
-
 
         if ($response) {
             $response = [
@@ -51,9 +48,7 @@ class AlumniController extends Controller
     {
         $response = Alumni::find($id);
         $response->update($request->all());
-        return $response;
 
-        
         if ($response) {
             $response = [
                 'status' => 200,

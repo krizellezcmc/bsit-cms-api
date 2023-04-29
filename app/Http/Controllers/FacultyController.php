@@ -29,7 +29,7 @@ class FacultyController extends Controller
                 'mi' => $Faculty->mi,
                 'lname' => $Faculty->lname,
                 'year' => '-',
-                'email' =>  Str::lower($Faculty->lname.'_'.$Faculty->fname.'@wmsu.ccs'),
+                'email' =>  Str::lower($Faculty->lname.$Faculty->fname[0].'_'.$Faculty->id.'@wmsu.ccs'),
                 'password' => Hash::make('@ccs2016'),
                 'role' => 1
             ]);
